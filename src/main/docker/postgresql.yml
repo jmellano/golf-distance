@@ -1,0 +1,11 @@
+version: '2'
+services:
+    golfdistance-postgresql:
+        image: postgres:9.6.5
+        # volumes:
+        #     - ~/volumes/jhipster/golfDistance/postgresql/:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=golfDistance
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432

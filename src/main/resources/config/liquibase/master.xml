@@ -9,7 +9,14 @@
     <include file="config/liquibase/changelog/20171004092330_added_entity_Referentiel.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171004092331_added_entity_ParametreApplicatif.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20171004092332_added_entity_ParametreMetier.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171004092514_added_entity_Player.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171004092515_added_entity_PlayerClub.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171004092516_added_entity_Calibration.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171004092517_added_entity_Shot.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20171004092330_added_entity_constraints_Referentiel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171004092515_added_entity_constraints_PlayerClub.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171004092516_added_entity_constraints_Calibration.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171004092517_added_entity_constraints_Shot.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

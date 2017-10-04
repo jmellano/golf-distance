@@ -1,0 +1,39 @@
+
+<div *ngIf="calibration">
+    <h2><span jhiTranslate="golfDistanceApp.calibration.detail.title">Calibration</span> {{calibration.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="golfDistanceApp.calibration.force">Force</span></dt>
+        <dd>
+            <span>{{calibration.force}}</span>
+        </dd>
+        <dt><span jhiTranslate="golfDistanceApp.calibration.average">Average</span></dt>
+        <dd>
+            <span>{{calibration.average}}</span>
+        </dd>
+        <dt><span jhiTranslate="golfDistanceApp.calibration.standardDeviation">Standard Deviation</span></dt>
+        <dd>
+            <span>{{calibration.standardDeviation}}</span>
+        </dd>
+        <dt><span jhiTranslate="golfDistanceApp.calibration.playerClub">Player Club</span></dt>
+        <dd>
+            <div *ngIf="calibration.playerClub">
+                <a [routerLink]="['/player-club', calibration.playerClub?.id]">{{calibration.playerClub?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'calibration/'+ calibration.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

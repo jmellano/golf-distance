@@ -11,6 +11,10 @@
                 "referentiel": "Referentiel",
                 "parametreApplicatif": "Parametre Applicatif",
                 "parametreMetier": "Parametre Metier",
+                "player": "Player",
+                "playerClub": "Player Club",
+                "calibration": "Calibration",
+                "shot": "Shot",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

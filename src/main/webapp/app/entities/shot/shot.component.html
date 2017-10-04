@@ -1,0 +1,64 @@
+<div>
+    <h2>
+        <span jhiTranslate="golfDistanceApp.shot.home.title">Shots</span>
+        <button class="btn btn-primary float-right jh-create-entity create-shot" [routerLink]="['/', { outlets: { popup: ['shot-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="golfDistanceApp.shot.home.createLabel">
+            Create new Shot
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="shots">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="golfDistanceApp.shot.force">Force</span></th>
+            <th><span jhiTranslate="golfDistanceApp.shot.distance">Distance</span></th>
+            <th><span jhiTranslate="golfDistanceApp.shot.playerClub">Player Club</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let shot of shots ;trackBy: trackId">
+                <td><a [routerLink]="['../shot', shot.id ]">{{shot.id}}</a></td>
+                <td>{{shot.force}}</td>
+                <td>{{shot.distance}}</td>
+                <td>
+                    <div *ngIf="shot.playerClub">
+                        <a [routerLink]="['../player-club', shot.playerClub?.id ]" >{{shot.playerClub?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../shot', shot.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'shot/'+ shot.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'shot/'+ shot.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

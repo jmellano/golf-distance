@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "playerClub",
+            "otherEntityName": "playerClub",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "force",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "average",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "standardDeviation",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20171004092516",
+    "entityTableName": "calibration",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

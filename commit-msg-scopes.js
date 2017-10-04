@@ -4,6 +4,7 @@ module.exports = {
         pic : true,
         /* eslint quote-props:0 */
         'undefined' : true,
-        'all': true
+        'all': true,
+        'player': true
         }
 };

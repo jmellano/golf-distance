@@ -1,0 +1,62 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myShotLabel" jhiTranslate="golfDistanceApp.shot.home.createOrEditLabel">Create or edit a Shot</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!shot.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="shot.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="golfDistanceApp.shot.force" for="field_force">Force</label>
+            <input type="number" class="form-control" name="force" id="field_force"
+                [(ngModel)]="shot.force" required />
+            <div [hidden]="!(editForm.controls.force?.dirty && editForm.controls.force?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.force?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.force?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="golfDistanceApp.shot.distance" for="field_distance">Distance</label>
+            <input type="number" class="form-control" name="distance" id="field_distance"
+                [(ngModel)]="shot.distance" required />
+            <div [hidden]="!(editForm.controls.distance?.dirty && editForm.controls.distance?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.distance?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.distance?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="golfDistanceApp.shot.playerClub" for="field_playerClub">Player Club</label>
+            <select class="form-control" id="field_playerClub" name="playerClub" [(ngModel)]="shot.playerClub" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="playerClubOption.id === shot.playerClub?.id ? shot.playerClub : playerClubOption" *ngFor="let playerClubOption of playerclubs; trackBy: trackPlayerClubById">{{playerClubOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

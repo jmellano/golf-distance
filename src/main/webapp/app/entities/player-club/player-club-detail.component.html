@@ -1,0 +1,35 @@
+
+<div *ngIf="playerClub">
+    <h2><span jhiTranslate="golfDistanceApp.playerClub.detail.title">Player Club</span> {{playerClub.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="golfDistanceApp.playerClub.type">Type</span></dt>
+        <dd>
+            <span>{{playerClub.type}}</span>
+        </dd>
+        <dt><span jhiTranslate="golfDistanceApp.playerClub.label">Label</span></dt>
+        <dd>
+            <span>{{playerClub.label}}</span>
+        </dd>
+        <dt><span jhiTranslate="golfDistanceApp.playerClub.player">Player</span></dt>
+        <dd>
+            <div *ngIf="playerClub.player">
+                <a [routerLink]="['/player', playerClub.player?.id]">{{playerClub.player?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'player-club/'+ playerClub.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

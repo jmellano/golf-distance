@@ -1,0 +1,24 @@
+{
+    "golfDistanceApp": {
+        "calibration" : {
+            "home": {
+                "title": "Calibrations",
+                "createLabel": "Create a new Calibration",
+                "createOrEditLabel": "Create or edit a Calibration"
+            },
+            "created": "A new Calibration is created with identifier {{ param }}",
+            "updated": "A Calibration is updated with identifier {{ param }}",
+            "deleted": "A Calibration is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Calibration {{ id }}?"
+            },
+            "detail": {
+                "title": "Calibration"
+            },
+            "force": "Force",
+            "average": "Average",
+            "standardDeviation": "Standard Deviation",
+            "playerClub": "Player Club"
+        }
+    }
+}

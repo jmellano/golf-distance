@@ -1,0 +1,35 @@
+entity Player {
+  id Integer required,
+  lastName String required,
+  firstName String required,
+}
+
+
+entity PlayerClub {
+  id Integer required,
+  type String required,
+  label String required,
+}
+relationship OneToMany {
+	Player{hasClubs} to PlayerClub
+}
+
+entity Calibration {
+  id Integer required,
+  force BigDecimal required,
+  average BigDecimal,
+  standardDeviation BigDecimal,
+}
+relationship OneToMany {
+	PlayerClub{shots} to Shot
+}
+
+entity Shot {
+	id Integer required,
+    force BigDecimal required,
+    distance BigDecimal required
+}
+
+relationship OneToMany {
+	PlayerClub{isCalibrated} to Calibration
+}

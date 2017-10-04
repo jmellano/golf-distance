@@ -1,0 +1,44 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "player",
+            "otherEntityName": "player",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "shots",
+            "otherEntityName": "shot",
+            "otherEntityRelationshipName": "playerClub"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "isCalibrated",
+            "otherEntityName": "calibration",
+            "otherEntityRelationshipName": "playerClub"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "type",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "label",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20171004092515",
+    "entityTableName": "player_club",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

@@ -4,6 +4,10 @@ import { GolfDistanceTypeReferentielModule } from './type-referentiel/type-refer
 import { GolfDistanceReferentielModule } from './referentiel/referentiel.module';
 import { GolfDistanceParametreApplicatifModule } from './parametre-applicatif/parametre-applicatif.module';
 import { GolfDistanceParametreMetierModule } from './parametre-metier/parametre-metier.module';
+import { GolfDistancePlayerModule } from './player/player.module';
+import { GolfDistancePlayerClubModule } from './player-club/player-club.module';
+import { GolfDistanceCalibrationModule } from './calibration/calibration.module';
+import { GolfDistanceShotModule } from './shot/shot.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -12,6 +16,10 @@ import { GolfDistanceParametreMetierModule } from './parametre-metier/parametre-
         GolfDistanceReferentielModule,
         GolfDistanceParametreApplicatifModule,
         GolfDistanceParametreMetierModule,
+        GolfDistancePlayerModule,
+        GolfDistancePlayerClubModule,
+        GolfDistanceCalibrationModule,
+        GolfDistanceShotModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

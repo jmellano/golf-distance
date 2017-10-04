@@ -42,6 +42,7 @@
     "languages": [
       "fr",
       "en"
-    ]
+    ],
+    "herokuAppName": "golf-distance"
   }
 }

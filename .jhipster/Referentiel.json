@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "typeReferentiel",
+            "otherEntityName": "typeReferentiel",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "code",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "libelle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ordre",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171004092330",
+    "entityTableName": "referentiel",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no"
+}

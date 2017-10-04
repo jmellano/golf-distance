@@ -1,0 +1,39 @@
+
+<div *ngIf="referentiel">
+    <h2><span jhiTranslate="golfDistanceApp.referentiel.detail.title">Referentiel</span> {{referentiel.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="golfDistanceApp.referentiel.code">Code</span></dt>
+        <dd>
+            <span>{{referentiel.code}}</span>
+        </dd>
+        <dt><span jhiTranslate="golfDistanceApp.referentiel.libelle">Libelle</span></dt>
+        <dd>
+            <span>{{referentiel.libelle}}</span>
+        </dd>
+        <dt><span jhiTranslate="golfDistanceApp.referentiel.ordre">Ordre</span></dt>
+        <dd>
+            <span>{{referentiel.ordre}}</span>
+        </dd>
+        <dt><span jhiTranslate="golfDistanceApp.referentiel.typeReferentiel">Type Referentiel</span></dt>
+        <dd>
+            <div *ngIf="referentiel.typeReferentiel">
+                <a [routerLink]="['/type-referentiel', referentiel.typeReferentiel?.id]">{{referentiel.typeReferentiel?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'referentiel/'+ referentiel.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

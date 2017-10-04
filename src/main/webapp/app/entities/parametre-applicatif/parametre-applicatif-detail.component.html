@@ -1,0 +1,33 @@
+
+<div *ngIf="parametreApplicatif">
+    <h2><span jhiTranslate="golfDistanceApp.parametreApplicatif.detail.title">Parametre Applicatif</span> {{parametreApplicatif.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="golfDistanceApp.parametreApplicatif.code">Code</span></dt>
+        <dd>
+            <span>{{parametreApplicatif.code}}</span>
+        </dd>
+        <dt><span jhiTranslate="golfDistanceApp.parametreApplicatif.libelle">Libelle</span></dt>
+        <dd>
+            <span>{{parametreApplicatif.libelle}}</span>
+        </dd>
+        <dt><span jhiTranslate="golfDistanceApp.parametreApplicatif.valeur">Valeur</span></dt>
+        <dd>
+            <span>{{parametreApplicatif.valeur}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'parametre-applicatif/'+ parametreApplicatif.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

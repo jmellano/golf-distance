@@ -1,0 +1,23 @@
+{
+    "golfDistanceApp": {
+        "typeReferentiel" : {
+            "home": {
+                "title": "Type Referentiels",
+                "createLabel": "Create a new Type Referentiel",
+                "createOrEditLabel": "Create or edit a Type Referentiel"
+            },
+            "created": "A new Type Referentiel is created with identifier {{ param }}",
+            "updated": "A Type Referentiel is updated with identifier {{ param }}",
+            "deleted": "A Type Referentiel is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Type Referentiel {{ id }}?"
+            },
+            "detail": {
+                "title": "Type Referentiel"
+            },
+            "trfCode": "Trf Code",
+            "libelle": "Libelle",
+            "typeDeReferentiel": "Type De Referentiel"
+        }
+    }
+}

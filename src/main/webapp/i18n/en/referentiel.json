@@ -1,0 +1,24 @@
+{
+    "golfDistanceApp": {
+        "referentiel" : {
+            "home": {
+                "title": "Referentiels",
+                "createLabel": "Create a new Referentiel",
+                "createOrEditLabel": "Create or edit a Referentiel"
+            },
+            "created": "A new Referentiel is created with identifier {{ param }}",
+            "updated": "A Referentiel is updated with identifier {{ param }}",
+            "deleted": "A Referentiel is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Referentiel {{ id }}?"
+            },
+            "detail": {
+                "title": "Referentiel"
+            },
+            "code": "Code",
+            "libelle": "Libelle",
+            "ordre": "Ordre",
+            "typeReferentiel": "Type Referentiel"
+        }
+    }
+}

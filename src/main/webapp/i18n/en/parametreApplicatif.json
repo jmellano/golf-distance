@@ -1,0 +1,23 @@
+{
+    "golfDistanceApp": {
+        "parametreApplicatif" : {
+            "home": {
+                "title": "Parametre Applicatifs",
+                "createLabel": "Create a new Parametre Applicatif",
+                "createOrEditLabel": "Create or edit a Parametre Applicatif"
+            },
+            "created": "A new Parametre Applicatif is created with identifier {{ param }}",
+            "updated": "A Parametre Applicatif is updated with identifier {{ param }}",
+            "deleted": "A Parametre Applicatif is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Parametre Applicatif {{ id }}?"
+            },
+            "detail": {
+                "title": "Parametre Applicatif"
+            },
+            "code": "Code",
+            "libelle": "Libelle",
+            "valeur": "Valeur"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "typeDeReferentiel",
+            "otherEntityName": "referentiel",
+            "otherEntityRelationshipName": "typeReferentiel"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "trfCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "libelle",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171004092329",
+    "entityTableName": "type_referentiel",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no"
+}

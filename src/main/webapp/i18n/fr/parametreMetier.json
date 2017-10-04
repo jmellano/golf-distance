@@ -1,0 +1,23 @@
+{
+    "golfDistanceApp": {
+        "parametreMetier" : {
+            "home": {
+                "title": "ParametreMetiers",
+                "createLabel": "Créer un nouveau Parametre Metier",
+                "createOrEditLabel": "Créer ou éditer un Parametre Metier"
+            },
+            "created": "Un nouveau Parametre Metier a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Parametre Metier avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Parametre Metier avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Parametre Metier {{ id }} ?"
+            },
+            "detail": {
+                "title": "Parametre Metier"
+            },
+            "code": "Code",
+            "libelle": "Libelle",
+            "valeur": "Valeur"
+        }
+    }
+}

@@ -1,0 +1,32 @@
+entity TypeReferentiel {
+  id Integer required,
+  trfCode String required,
+  libelle String
+}
+
+entity Referentiel {
+  id Integer required,
+  code String required,
+  libelle String,
+  ordre Integer
+}
+
+relationship OneToMany {
+	TypeReferentiel{typeDeReferentiel} to Referentiel
+}
+
+entity ParametreApplicatif {
+  id Integer required,
+  code String required,
+  libelle String,
+  valeur String required
+}
+paginate * with infinite-scroll
+
+entity ParametreMetier {
+  id Integer required,
+  code String required,
+  libelle String,
+  valeur String required
+}
+paginate * with infinite-scroll

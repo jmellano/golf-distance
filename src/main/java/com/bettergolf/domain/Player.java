@@ -125,6 +125,15 @@ public class Player implements Serializable {
             "id=" + getId() +
             ", lastName='" + getLastName() + "'" +
             ", firstName='" + getFirstName() + "'" +
+            ", userID='" + getUserId() + "'" +
             "}";
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

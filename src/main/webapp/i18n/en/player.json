@@ -17,6 +17,7 @@
             },
             "lastName": "Last Name",
             "firstName": "First Name",
+            "userId": "User Id",
             "hasClubs": "Has Clubs"
         }
     }

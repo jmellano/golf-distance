@@ -5,6 +5,7 @@ export class Player implements BaseEntity {
         public id?: number,
         public lastName?: string,
         public firstName?: string,
+        public userId?: number,
         public hasClubs?: BaseEntity[],
     ) {
     }

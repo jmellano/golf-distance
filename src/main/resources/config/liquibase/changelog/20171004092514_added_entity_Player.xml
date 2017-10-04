@@ -31,7 +31,20 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+    <changeSet id="20170927-manuel" author="jmellano">
+        <addColumn schemaName="public"
+                   tableName="player">
+            <column name="user_id" type="bigint"/>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="player"
+                                 constraintName="fk_player_id_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+    </changeSet>
+
 </databaseChangeLog>

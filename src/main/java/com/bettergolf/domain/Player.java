@@ -31,6 +31,9 @@ public class Player implements Serializable {
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
+    @Column(name = "user_id")
+    private Long userId;
+
     @OneToMany(mappedBy = "player")
     @JsonIgnore
     private Set<PlayerClub> hasClubs = new HashSet<>();

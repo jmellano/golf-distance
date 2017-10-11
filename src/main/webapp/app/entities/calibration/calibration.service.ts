@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-import { SERVER_API_URL } from '../../app.constants';
+import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Rx';
+import {SERVER_API_URL} from '../../app.constants';
 
-import { Calibration } from './calibration.model';
-import { ResponseWrapper, createRequestOption } from '../../shared';
+import {Calibration} from './calibration.model';
+import {ResponseWrapper, createRequestOption} from '../../shared';
 
 @Injectable()
 export class CalibrationService {
 
     private resourceUrl = SERVER_API_URL + 'api/calibrations';
 
-    constructor(private http: Http) { }
+    constructor(private http: Http) {
+    }
 
     create(calibration: Calibration): Observable<Calibration> {
         const copy = this.convert(calibration);
@@ -36,6 +37,12 @@ export class CalibrationService {
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
         return this.http.get(this.resourceUrl, options)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
+    queryForPlayerClub(id: number): Observable<ResponseWrapper> {
+        console.log(`Appel a distance : '${id}`);
+        return this.http.get(`${this.resourceUrl}/club/${id}`)
             .map((res: Response) => this.convertResponse(res));
     }
 

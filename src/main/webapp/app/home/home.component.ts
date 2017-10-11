@@ -1,8 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component, OnInit} from '@angular/core';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager, JhiAlertService} from 'ng-jhipster';
 
-import { Account, LoginModalService, Principal } from '../shared';
+import {CalibrationService} from '../entities/calibration/calibration.service';
+import {Calibration} from '../entities/calibration/calibration.model';
+
+import {PlayerClubService} from '../entities/player-club/player-club.service';
+import {PlayerClub} from '../entities/player-club/player-club.model';
+
+import {ResponseWrapper, Account, LoginModalService, Principal} from '../shared';
 
 @Component({
     selector: 'jhi-home',
@@ -15,15 +21,39 @@ import { Account, LoginModalService, Principal } from '../shared';
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
+    playerClubs: PlayerClub[];
+    calibrations: Calibration[];
 
-    constructor(
-        private principal: Principal,
-        private loginModalService: LoginModalService,
-        private eventManager: JhiEventManager
-    ) {
+    constructor(private principal: Principal,
+                private alertService: JhiAlertService,
+                private loginModalService: LoginModalService,
+                private eventManager: JhiEventManager,
+                private calibrationService: CalibrationService,
+                private playerClubService: PlayerClubService) {
+    }
+
+    loadAll() {
+        const self = this;
+        self.calibrations = [];
+        this.principal.identity().then(function (res) {
+            self.playerClubService.queryForPlayer(res.playerId).subscribe(
+                (resPC: ResponseWrapper) => {
+                    self.playerClubs = resPC.json;
+                    self.playerClubs.forEach((club, index) => {
+                        self.calibrationService.queryForPlayerClub(club.id).subscribe(
+                            (resCS: ResponseWrapper) => {
+                                self.calibrations[index] = resCS.json;
+                            })
+                    });
+                },
+                (_res: ResponseWrapper) => self.onError(_res.json)
+            );
+        });
+
     }
 
     ngOnInit() {
+        this.loadAll();
         this.principal.identity().then((account) => {
             this.account = account;
         });
@@ -44,5 +74,9 @@ export class HomeComponent implements OnInit {
 
     login() {
         this.modalRef = this.loginModalService.open();
+    }
+
+    private onError(error) {
+        this.alertService.error(error.message, null, null);
     }
 }

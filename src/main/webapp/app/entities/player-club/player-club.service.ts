@@ -39,6 +39,11 @@ export class PlayerClubService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    queryForPlayer(id: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/player/${id}`)
+        .map((res: Response) => this.convertResponse(res));
+    }
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }

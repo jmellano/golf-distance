@@ -1,7 +1,6 @@
 package com.bettergolf.web.rest;
 
 import com.bettergolf.domain.PlayerClub;
-import com.bettergolf.repository.PlayerClubDistanceRepository;
 import com.bettergolf.repository.PlayerClubRepository;
 import com.bettergolf.web.rest.util.HeaderUtil;
 import com.codahale.metrics.annotation.Timed;
@@ -28,13 +27,10 @@ public class PlayerClubResource {
 
     private static final String ENTITY_NAME = "playerClub";
 
-    private final PlayerClubDistanceRepository playerClubDistanceRepository;
-
     private final PlayerClubRepository playerClubRepository;
 
-    public PlayerClubResource(PlayerClubRepository playerClubRepository, PlayerClubDistanceRepository playerClubDistanceRepository) {
+    public PlayerClubResource(PlayerClubRepository playerClubRepository) {
         this.playerClubRepository = playerClubRepository;
-        this.playerClubDistanceRepository = playerClubDistanceRepository;
     }
 
     /**

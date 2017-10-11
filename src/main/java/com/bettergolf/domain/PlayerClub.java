@@ -40,9 +40,8 @@ public class PlayerClub implements Serializable {
     @JsonIgnore
     private Set<Shot> shots = new HashSet<>();
 
-    @OneToMany(mappedBy = "playerClub")
 // TODO : Trouver une meilleure facon avec Hibernate de ne pas charger à chaque fois les distances (test avec PlayerClubDistance à finir)
-//    @JsonIgnore
+    @OneToMany(mappedBy = "playerClub")
     @Fetch(FetchMode.JOIN)
     private Set<Calibration> distances = new HashSet<>();
 

@@ -103,6 +103,15 @@ public class CalibrationResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(calibration));
     }
 
+
+    @GetMapping("/calibrations/club/{playerClubId}")
+    @Timed
+    public List<Calibration> getCalibrationForPlayerClub(@PathVariable Long playerClubId) {
+        log.debug("REST request to get playerClubId : {}", playerClubId);
+        return calibrationRepository.findAllByPlayerClubId(playerClubId);
+    }
+
+
     /**
      * DELETE  /calibrations/:id : delete the "id" calibration.
      *

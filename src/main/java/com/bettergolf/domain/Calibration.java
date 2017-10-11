@@ -1,6 +1,8 @@
 package com.bettergolf.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -32,6 +34,7 @@ public class Calibration implements Serializable {
     private BigDecimal standardDeviation;
 
     @ManyToOne
+    @JsonIgnore
     private PlayerClub playerClub;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove

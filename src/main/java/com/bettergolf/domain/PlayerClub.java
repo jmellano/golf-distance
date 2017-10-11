@@ -1,6 +1,8 @@
 package com.bettergolf.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -39,8 +41,10 @@ public class PlayerClub implements Serializable {
     private Set<Shot> shots = new HashSet<>();
 
     @OneToMany(mappedBy = "playerClub")
-    @JsonIgnore
-    private Set<Calibration> isCalibrateds = new HashSet<>();
+// TODO : Trouver une meilleure facon avec Hibernate de ne pas charger à chaque fois les distances (test avec PlayerClubDistance à finir)
+//    @JsonIgnore
+    @Fetch(FetchMode.JOIN)
+    private Set<Calibration> distances = new HashSet<>();
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -115,29 +119,29 @@ public class PlayerClub implements Serializable {
         this.shots = shots;
     }
 
-    public Set<Calibration> getIsCalibrateds() {
-        return isCalibrateds;
+    public Set<Calibration> getDistances() {
+        return distances;
     }
 
     public PlayerClub isCalibrateds(Set<Calibration> calibrations) {
-        this.isCalibrateds = calibrations;
+        this.distances = calibrations;
         return this;
     }
 
-    public PlayerClub addIsCalibrated(Calibration calibration) {
-        this.isCalibrateds.add(calibration);
+    public PlayerClub addDistance(Calibration calibration) {
+        this.distances.add(calibration);
         calibration.setPlayerClub(this);
         return this;
     }
 
-    public PlayerClub removeIsCalibrated(Calibration calibration) {
-        this.isCalibrateds.remove(calibration);
+    public PlayerClub removeDistance(Calibration calibration) {
+        this.distances.remove(calibration);
         calibration.setPlayerClub(null);
         return this;
     }
 
-    public void setIsCalibrateds(Set<Calibration> calibrations) {
-        this.isCalibrateds = calibrations;
+    public void setDistances(Set<Calibration> calibrations) {
+        this.distances = calibrations;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

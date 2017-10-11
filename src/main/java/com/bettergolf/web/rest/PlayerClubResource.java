@@ -1,10 +1,10 @@
 package com.bettergolf.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import com.bettergolf.domain.PlayerClub;
-
+import com.bettergolf.repository.PlayerClubDistanceRepository;
 import com.bettergolf.repository.PlayerClubRepository;
 import com.bettergolf.web.rest.util.HeaderUtil;
+import com.codahale.metrics.annotation.Timed;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -29,10 +28,13 @@ public class PlayerClubResource {
 
     private static final String ENTITY_NAME = "playerClub";
 
+    private final PlayerClubDistanceRepository playerClubDistanceRepository;
+
     private final PlayerClubRepository playerClubRepository;
 
-    public PlayerClubResource(PlayerClubRepository playerClubRepository) {
+    public PlayerClubResource(PlayerClubRepository playerClubRepository, PlayerClubDistanceRepository playerClubDistanceRepository) {
         this.playerClubRepository = playerClubRepository;
+        this.playerClubDistanceRepository = playerClubDistanceRepository;
     }
 
     /**
@@ -87,7 +89,21 @@ public class PlayerClubResource {
     public List<PlayerClub> getAllPlayerClubs() {
         log.debug("REST request to get all PlayerClubs");
         return playerClubRepository.findAll();
-        }
+    }
+
+    /**
+     * GET  /player-clubs : get all the playerClubs.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of playerClubs in body
+     */
+    @GetMapping("/player-clubs/player/{id}")
+    @Timed
+    public List<PlayerClub> getAllPlayerClubsForPlayer(@PathVariable Long id) {
+        log.debug("REST request to get all PlayerClubs");
+        // TODO: Finir le test avec PlayerClubDistance
+        List<PlayerClub> clubs = playerClubRepository.findByPlayerId(id);
+        return clubs;
+    }
 
     /**
      * GET  /player-clubs/:id : get the "id" playerClub.

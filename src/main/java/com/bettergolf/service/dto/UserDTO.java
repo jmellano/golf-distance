@@ -1,14 +1,13 @@
 package com.bettergolf.service.dto;
 
 import com.bettergolf.config.Constants;
-
 import com.bettergolf.domain.Authority;
 import com.bettergolf.domain.User;
-
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -40,6 +39,8 @@ public class UserDTO {
 
     private boolean activated = false;
 
+    private Long playerId;
+
     @Size(min = 2, max = 5)
     private String langKey;
 
@@ -63,6 +64,9 @@ public class UserDTO {
             user.getCreatedBy(), user.getCreatedDate(), user.getLastModifiedBy(), user.getLastModifiedDate(),
             user.getAuthorities().stream().map(Authority::getName)
                 .collect(Collectors.toSet()));
+        if(user != null && user.getPlayerId()!= null ){
+            this.playerId = user.getPlayerId().orElse(null);
+        }
     }
 
     public UserDTO(Long id, String login, String firstName, String lastName,
@@ -147,6 +151,14 @@ public class UserDTO {
 
     public Set<String> getAuthorities() {
         return authorities;
+    }
+
+    public Long getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(Long playerId) {
+        this.playerId = playerId;
     }
 
     @Override

@@ -12,10 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.time.Instant;
 
 /**
@@ -61,6 +58,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @NotNull
     @Column(nullable = false)
     private boolean activated = false;
+
+    @Transient
+    private Optional<Long> playerId;
 
     @Size(min = 2, max = 5)
     @Column(name = "lang_key", length = 5)
@@ -195,6 +195,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public Optional<Long> getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(Optional<Long> playerId) {
+        this.playerId = playerId;
     }
 
     @Override

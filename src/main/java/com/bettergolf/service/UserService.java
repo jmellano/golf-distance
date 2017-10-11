@@ -1,9 +1,11 @@
 package com.bettergolf.service;
 
 import com.bettergolf.domain.Authority;
+import com.bettergolf.domain.Player;
 import com.bettergolf.domain.User;
 import com.bettergolf.repository.AuthorityRepository;
 import com.bettergolf.config.Constants;
+import com.bettergolf.repository.PlayerRepository;
 import com.bettergolf.repository.UserRepository;
 import com.bettergolf.security.AuthoritiesConstants;
 import com.bettergolf.security.SecurityUtils;
@@ -35,14 +37,17 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final PlayerRepository playerRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     private final SocialService socialService;
 
     private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SocialService socialService, AuthorityRepository authorityRepository) {
+    public UserService(UserRepository userRepository, PlayerRepository playerRepository, PasswordEncoder passwordEncoder, SocialService socialService, AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;
+        this.playerRepository = playerRepository;
         this.passwordEncoder = passwordEncoder;
         this.socialService = socialService;
         this.authorityRepository = authorityRepository;
@@ -219,7 +224,14 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public User getUserWithAuthorities() {
-        return userRepository.findOneWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin()).orElse(null);
+        User user = userRepository.findOneWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin()).orElse(null);
+        if(user != null){
+            Player player = playerRepository.findOneByUserId(user.getId()).orElse(null);
+            if(player != null){
+                user.setPlayerId(Optional.ofNullable(player.getId()));
+            }
+        }
+        return user;
     }
 
     /**

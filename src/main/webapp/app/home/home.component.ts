@@ -9,6 +9,7 @@ import {PlayerClubService} from '../entities/player-club/player-club.service';
 import {PlayerClub} from '../entities/player-club/player-club.model';
 
 import {ResponseWrapper, Account, LoginModalService, Principal} from '../shared';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'jhi-home',
@@ -22,38 +23,30 @@ export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
     playerClubs: PlayerClub[];
-    calibrations: Calibration[];
 
     constructor(private principal: Principal,
                 private alertService: JhiAlertService,
                 private loginModalService: LoginModalService,
                 private eventManager: JhiEventManager,
-                private calibrationService: CalibrationService,
                 private playerClubService: PlayerClubService) {
     }
 
     loadAll() {
         const self = this;
-        self.calibrations = [];
         this.principal.identity().then(function (res) {
             self.playerClubService.queryForPlayer(res.playerId).subscribe(
                 (resPC: ResponseWrapper) => {
                     self.playerClubs = resPC.json;
-                    self.playerClubs.forEach((club, index) => {
-                        self.calibrationService.queryForPlayerClub(club.id).subscribe(
-                            (resCS: ResponseWrapper) => {
-                                self.calibrations[index] = resCS.json;
-                            })
-                    });
                 },
                 (_res: ResponseWrapper) => self.onError(_res.json)
             );
         });
-
     }
 
     ngOnInit() {
         this.loadAll();
+        console.log('lodash version:', _.VERSION);
+
         this.principal.identity().then((account) => {
             this.account = account;
         });

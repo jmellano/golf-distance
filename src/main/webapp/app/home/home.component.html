@@ -1,24 +1,14 @@
 <div class="row">
-    <div class="col-md-3">
-        <span class="hipster img-fluid rounded"></span>
-    </div>
-    <div class="col-md-9">
-        <h1 class="display-4" jhiTranslate="home.title" translateValues="{username: '{{account.login}}'}">Welcome !</h1>
-        <p class="lead" jhiTranslate="home.subtitle">This is your homepage</p>
-
-        <ul>Liste de vos clubs / étalonnage
-            <li *ngFor="let club of playerClubs; trackBy: trackIdentity">
-                <span>Club : {{club.label}}</span>
-            </li>
-        </ul>
-
-        <ul>Liste de vos étalonnage
-            <div *ngFor="let club of calibrations; let i=index">
-                <li *ngFor="let distance of club; let j=index">
-                    <span>Force : {{distance.force}} / Distance : {{distance.average}} / Ecart-type : {{distance.standardDeviation}}</span>
-                </li>
+    <ng-container *ngFor="let club of playerClubs; let i=index">
+        <ng-container *ngFor="let distance of club.distances; let j=index">
+            <div class="col-xs-6 col-sm-6">
+                <div class="card bg-{{distance.standardDeviationResult}}">
+                    <div class="container">
+                        <h4><b>{{club.label}} - {{distance.force}} %</b></h4>
+                        <p>Distance : {{distance.average}} / Ecart-type : {{distance.standardDeviation}}</p>
+                    </div>
+                </div>
             </div>
-        </ul>
-
-    </div>
+        </ng-container>
+    </ng-container>
 </div>

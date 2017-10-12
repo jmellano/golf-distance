@@ -7,7 +7,7 @@ export class PlayerClub implements BaseEntity {
         public label?: string,
         public player?: BaseEntity,
         public shots?: BaseEntity[],
-        public isCalibrateds?: BaseEntity[],
+        public distances?: BaseEntity[],
     ) {
     }
 }

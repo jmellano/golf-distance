@@ -2,6 +2,7 @@ package com.bettergolf.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -24,14 +25,18 @@ public class Calibration implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "jhi_force", precision=10, scale=2, nullable = false)
+    @Column(name = "jhi_force", precision = 10, scale = 2, nullable = false)
     private BigDecimal force;
 
-    @Column(name = "average", precision=10, scale=2)
+    @Column(name = "average", precision = 10, scale = 2)
     private BigDecimal average;
 
-    @Column(name = "standard_deviation", precision=10, scale=2)
+    @Column(name = "standard_deviation", precision = 10, scale = 2)
     private BigDecimal standardDeviation;
+
+    @Transient
+    @JsonProperty
+    private String standardDeviationResult;
 
     @ManyToOne
     @JsonIgnore
@@ -98,6 +103,29 @@ public class Calibration implements Serializable {
         this.playerClub = playerClub;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
+
+
+    public String getStandardDeviationResult() {
+        if (standardDeviation.compareTo(BigDecimal.ONE) <0 ) {
+           return StandardDeviationResultEnum.EXCEPTIONNAL.toString();
+        }
+        if (standardDeviation.compareTo(new BigDecimal(2)) <0 ) {
+            return StandardDeviationResultEnum.GOOD.toString();
+        }
+        if (standardDeviation.compareTo(new BigDecimal(3)) <0 ) {
+            return StandardDeviationResultEnum.NORMAL.toString();
+        }
+        if (standardDeviation.compareTo(new BigDecimal(4)) <0 ) {
+            return StandardDeviationResultEnum.BAD.toString();
+        }
+        else {
+            return StandardDeviationResultEnum.AWFUL.toString();
+        }
+    }
+
+    public void setStandardDeviationResult(String standardDeviationResult) {
+        this.standardDeviationResult = standardDeviationResult;
+    }
 
     @Override
     public boolean equals(Object o) {

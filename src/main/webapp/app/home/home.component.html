@@ -1,14 +1,91 @@
-<div class="row">
-    <ng-container *ngFor="let club of playerClubs; let i=index">
-        <ng-container *ngFor="let distance of club.distances; let j=index">
-            <div class="col-xs-6 col-sm-6">
-                <div class="card bg-{{distance.standardDeviationResult}}">
-                    <div class="container">
-                        <h4><b>{{club.label}} - {{distance.force}} %</b></h4>
-                        <p>Distance : {{distance.average}} / Ecart-type : {{distance.standardDeviation}}</p>
+<div class="d-flex flex-column">
+    <div class="">
+        <ng-container *ngFor="let club of playerClubs; let i=index">
+            <ng-container *ngFor="let distance of club.distances; let j=index">
+                <div class="p-2">
+                    <div class="card bg-{{distance.standardDeviationResult}}">
+                        <div class="container">
+                            <h4><b>{{club.label}} - {{distance.force}} %</b></h4>
+                            <p>Distance : {{distance.average}} / Ecart-type : {{distance.standardDeviation}}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </ng-container>
         </ng-container>
-    </ng-container>
+    </div>
+
+
+    <footer class="footer fixed-bottom">
+        <button type="button" class="btn btn-primary"
+                (click)="open(content)"
+                style="width:100%; height: 3em">
+            Ajouter un coup
+        </button>
+    </footer>
 </div>
+<!--[routerLink]="['/', { outlets: { popup: 'player/'+ 2 + '/addShot'} }]"-->
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Ajouter un coup</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form name="addShot" role="form" novalidate (ngSubmit)="addShot()" #addShotForm="ngForm">
+            <jhi-alert-error></jhi-alert-error>
+            <div class="form-group" [hidden]="!playerId">
+                <label for="id" jhiTranslate="global.field.id">ID</label>
+                <input type="text" class="form-control" id="id" name="id"
+                       [(ngModel)]="playerId" readonly/>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="choixclub"><span>Club joué : </span></label>
+                <select id="choixclub" [(ngModel)]="shot.playerClub.id" name="clubJoue" required
+                        class="form-control ng-untouched ng-pristine ng-valid" #clubJoueInput="ngModel">
+                    <option #clubid *ngFor="let club of playerClubs" [value]="club.id">
+                        {{club.label}}
+                    </option>
+                </select>
+                <div *ngIf="clubJoueInput.dirty && clubJoueInput.invalid">
+                    <small class="form-text text-danger"
+                           *ngIf="clubJoueInput.errors.required" jhiTranslate="entity.validation.required">
+                        This field is required      .
+                    </small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="choix-force"><span>Force du coup : </span> </label>
+                <select id="choix-force" [(ngModel)]="shot.force" name="forceJoue" required
+                        class="form-control ng-untouched ng-pristine ng-valid" #forceInput="ngModel">
+                    <option *ngFor="let force of forceDisponible" [value]="force.id">
+                        {{force.label}}
+                    </option>
+                </select>
+                <div *ngIf="forceInput.dirty && forceInput.invalid">
+                    <small class="form-text text-danger"
+                           *ngIf="forceInput.errors.required" jhiTranslate="entity.validation.required">
+                        This field is required      .
+                    </small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="distance-parcourue">Distance parcourue: </label>
+                <input [(ngModel)]="shot.distance" name="distanceParcourue" required
+                       id="distance-parcourue" type="number" min="0" step="0.1" #distanceInput="ngModel"
+                        class="form-control ng-untouched ng-pristine ng-invalid">
+                <div *ngIf="distanceInput.dirty && distanceInput.invalid">
+                    <small class="form-text text-danger"
+                           *ngIf="distanceInput.errors.required" jhiTranslate="entity.validation.required">
+                        This field is required      .
+                    </small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+                <button type="submit" class="btn btn-outline-dark">Ajouter le coup</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

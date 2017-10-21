@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 
 /**
  * Spring Data JPA repository for the Shot entity.
@@ -13,4 +16,7 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface ShotRepository extends JpaRepository<Shot, Long> {
 
+    List<Shot> findAllByPlayerClubId(Long id);
+
+    List<Shot> findAllByPlayerClubIdAndForce(Long id, BigDecimal force);
 }

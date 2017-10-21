@@ -1,5 +1,7 @@
 package com.bettergolf.web.rest;
 
+import com.bettergolf.domain.Calibration;
+import com.bettergolf.repository.CalibrationRepository;
 import com.codahale.metrics.annotation.Timed;
 import com.bettergolf.domain.Shot;
 
@@ -30,9 +32,11 @@ public class ShotResource {
     private static final String ENTITY_NAME = "shot";
 
     private final ShotRepository shotRepository;
+    private final CalibrationRepository calibrationRepository;
 
-    public ShotResource(ShotRepository shotRepository) {
+    public ShotResource(ShotRepository shotRepository, CalibrationRepository calibrationRepository) {
         this.shotRepository = shotRepository;
+        this.calibrationRepository = calibrationRepository;
     }
 
     /**
@@ -50,6 +54,18 @@ public class ShotResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new shot cannot already have an ID")).body(null);
         }
         Shot result = shotRepository.save(shot);
+
+        Calibration calibration = calibrationRepository.getOneByPlayerClubIdAndForce(shot.getPlayerClub().getId(), shot.getForce());
+        List<Shot> shots = shotRepository.findAllByPlayerClubIdAndForce(shot.getPlayerClub().getId(), shot.getForce());
+
+        if(calibration == null){
+            calibration = new Calibration();
+            calibration.setForce(shot.getForce());
+            calibration.setPlayerClub(shot.getPlayerClub());
+        }
+        calibration.updateCalibrationPlayerClub(shots);
+        calibrationRepository.save(calibration);
+
         return ResponseEntity.created(new URI("/api/shots/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);

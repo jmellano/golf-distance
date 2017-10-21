@@ -1,14 +1,20 @@
 package com.bettergolf.domain;
 
 
+import com.bettergolf.repository.ShotRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.inject.Inject;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
+import java.util.List;
 import java.util.Objects;
+import java.util.OptionalDouble;
 
 /**
  * A Calibration.
@@ -126,6 +132,22 @@ public class Calibration implements Serializable {
     public void setStandardDeviationResult(String standardDeviationResult) {
         this.standardDeviationResult = standardDeviationResult;
     }
+
+    public void updateCalibrationPlayerClub(List<Shot> shots) {
+
+        final double average = shots.stream().mapToDouble(a -> a.getDistance().doubleValue()).average().orElse(0);
+        final double rawSum =
+            shots.stream().mapToDouble((x) -> Math.pow(x.getDistance().doubleValue() - average,
+                    2.0))
+                .sum();
+        if(shots.size() > 1){
+            final double standardDeviation = Math.sqrt(rawSum / (shots.size() - 1));
+            this.standardDeviation = new BigDecimal(standardDeviation, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
+        }
+
+        this.average = new BigDecimal(average, MathContext.DECIMAL64);
+    }
+
 
     @Override
     public boolean equals(Object o) {

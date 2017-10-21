@@ -3,6 +3,7 @@ package com.bettergolf.web.rest;
 import com.bettergolf.GolfDistanceApp;
 
 import com.bettergolf.domain.Shot;
+import com.bettergolf.repository.CalibrationRepository;
 import com.bettergolf.repository.ShotRepository;
 import com.bettergolf.web.rest.errors.ExceptionTranslator;
 
@@ -48,6 +49,9 @@ public class ShotResourceIntTest {
     private ShotRepository shotRepository;
 
     @Autowired
+    private CalibrationRepository calibrationRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -66,7 +70,7 @@ public class ShotResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ShotResource shotResource = new ShotResource(shotRepository);
+        final ShotResource shotResource = new ShotResource(shotRepository, calibrationRepository);
         this.restShotMockMvc = MockMvcBuilders.standaloneSetup(shotResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

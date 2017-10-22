@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
 
     loadAll() {
         const self = this;
-        this.principal.identity().then(function (res) {
+        this.principal.identity().then(function(res) {
             self.playerId = res.playerId;
             self.forceDisponible = [{id: '0.25', label: '25%'},
                 {id: '0.50', label: '50%'},
@@ -112,7 +112,6 @@ export class HomeComponent implements OnInit {
 
     registerAddShotSuccess() {
         this.eventManager.subscribe('shotListModification', (message) => {
-            console.log("Ok shot ajouté");
             this.loadAll();
         });
     }

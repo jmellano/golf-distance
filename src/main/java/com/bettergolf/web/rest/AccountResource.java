@@ -1,5 +1,7 @@
 package com.bettergolf.web.rest;
 
+import com.bettergolf.domain.Player;
+import com.bettergolf.repository.PlayerRepository;
 import com.codahale.metrics.annotation.Timed;
 
 import com.bettergolf.domain.User;
@@ -40,14 +42,17 @@ public class AccountResource {
 
     private final MailService mailService;
 
+    private final PlayerRepository playerRepository;
+
     private static final String CHECK_ERROR_MESSAGE = "Incorrect password";
 
     public AccountResource(UserRepository userRepository, UserService userService,
-            MailService mailService) {
+                           MailService mailService, PlayerRepository playerRepository) {
 
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
+        this.playerRepository = playerRepository;
     }
 
     /**
@@ -77,10 +82,21 @@ public class AccountResource {
                             managedUserVM.getEmail().toLowerCase(), managedUserVM.getImageUrl(),
                             managedUserVM.getLangKey());
 
+                    attachNewPlayerToUser(user);
+
                     mailService.sendActivationEmail(user);
                     return new ResponseEntity<>(HttpStatus.CREATED);
                 })
         );
+    }
+
+    private void attachNewPlayerToUser(User user) {
+        Player playerToCreate = new Player();
+        Long userId = userRepository.findOneByLogin(user.getLogin()).get().getId();
+        playerToCreate.setUserId(userId);
+        playerToCreate.setFirstName("");
+        playerToCreate.setLastName("");
+        playerRepository.save(playerToCreate);
     }
 
     /**

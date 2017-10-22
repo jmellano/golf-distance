@@ -4,6 +4,7 @@ import com.bettergolf.GolfDistanceApp;
 import com.bettergolf.domain.Authority;
 import com.bettergolf.domain.User;
 import com.bettergolf.repository.AuthorityRepository;
+import com.bettergolf.repository.PlayerRepository;
 import com.bettergolf.repository.UserRepository;
 import com.bettergolf.security.AuthoritiesConstants;
 import com.bettergolf.service.MailService;
@@ -29,7 +30,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -53,6 +53,9 @@ public class AccountResourceIntTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PlayerRepository playerRepository;
 
     @Autowired
     private AuthorityRepository authorityRepository;
@@ -82,10 +85,10 @@ public class AccountResourceIntTest {
         doNothing().when(mockMailService).sendActivationEmail(anyObject());
 
         AccountResource accountResource =
-            new AccountResource(userRepository, userService, mockMailService);
+            new AccountResource(userRepository, userService, mockMailService, playerRepository);
 
         AccountResource accountUserMockResource =
-            new AccountResource(userRepository, mockUserService, mockMailService);
+            new AccountResource(userRepository, mockUserService, mockMailService, playerRepository);
 
         this.restMvc = MockMvcBuilders.standaloneSetup(accountResource)
             .setMessageConverters(httpMessageConverters)

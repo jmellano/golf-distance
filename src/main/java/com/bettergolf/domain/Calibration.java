@@ -112,20 +112,25 @@ public class Calibration implements Serializable {
 
 
     public String getStandardDeviationResult() {
-        if (standardDeviation.compareTo(BigDecimal.ONE) <0 ) {
-           return StandardDeviationResultEnum.EXCEPTIONNAL.toString();
-        }
-        if (standardDeviation.compareTo(new BigDecimal(2)) <0 ) {
-            return StandardDeviationResultEnum.GOOD.toString();
-        }
-        if (standardDeviation.compareTo(new BigDecimal(3)) <0 ) {
-            return StandardDeviationResultEnum.NORMAL.toString();
-        }
-        if (standardDeviation.compareTo(new BigDecimal(4)) <0 ) {
-            return StandardDeviationResultEnum.BAD.toString();
-        }
-        else {
-            return StandardDeviationResultEnum.AWFUL.toString();
+        if (average != null && (average.compareTo(BigDecimal.ZERO) != 0)) {
+            BigDecimal CENT = new BigDecimal(100);
+            BigDecimal rapportPourcentage = standardDeviation.divide(average,MathContext.DECIMAL64).multiply(CENT);
+            if (rapportPourcentage.compareTo(BigDecimal.ONE) < 0) {
+                return StandardDeviationResultEnum.EXCEPTIONNAL.toString();
+            }
+            if (rapportPourcentage.compareTo(new BigDecimal(2)) < 0) {
+                return StandardDeviationResultEnum.GOOD.toString();
+            }
+            if (rapportPourcentage.compareTo(new BigDecimal(3)) < 0) {
+                return StandardDeviationResultEnum.NORMAL.toString();
+            }
+            if (rapportPourcentage.compareTo(new BigDecimal(4)) < 0) {
+                return StandardDeviationResultEnum.BAD.toString();
+            } else {
+                return StandardDeviationResultEnum.AWFUL.toString();
+            }
+        } else {
+            return null;
         }
     }
 
@@ -138,9 +143,9 @@ public class Calibration implements Serializable {
         final double average = shots.stream().mapToDouble(a -> a.getDistance().doubleValue()).average().orElse(0);
         final double rawSum =
             shots.stream().mapToDouble((x) -> Math.pow(x.getDistance().doubleValue() - average,
-                    2.0))
+                2.0))
                 .sum();
-        if(shots.size() > 1){
+        if (shots.size() > 1) {
             final double standardDeviation = Math.sqrt(rawSum / (shots.size() - 1));
             this.standardDeviation = new BigDecimal(standardDeviation, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP);
         }

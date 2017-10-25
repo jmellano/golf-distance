@@ -1,19 +1,19 @@
 {
     "golfDistanceApp": {
-        "playerClub" : {
+        "playerClub": {
             "home": {
-                "title": "PlayerClubs",
-                "createLabel": "Créer un nouveau Player Club",
-                "createOrEditLabel": "Créer ou éditer un Player Club"
+                "title": "Mes Clubs",
+                "createLabel": "Ajouter un nouveau club",
+                "createOrEditLabel": "Ajouter ou éditer un Club"
             },
-            "created": "Un nouveau Player Club a été créé avec l'identifiant {{ param }}",
-            "updated": "Le Player Club avec l'identifiant {{ param }} a été mis à jour",
-            "deleted": "Le Player Club avec l'identifiant {{ param }} a été supprimé",
+            "created": "Un nouveau Club a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Club avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Club avec l'identifiant {{ param }} a été supprimé",
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Player Club {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer le Club {{ id }} ?"
             },
             "detail": {
-                "title": "Player Club"
+                "title": "Club"
             },
             "type": "Type",
             "label": "Label",

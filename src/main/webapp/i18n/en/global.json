@@ -20,6 +20,7 @@
             "account": {
                 "main": "Account",
                 "settings": "Settings",
+                "clubs": "My Clubs",
                 "password": "Password",
                 "sessions": "Sessions",
                 "login": "Sign in",

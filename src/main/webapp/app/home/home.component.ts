@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
     isSaving: boolean;
     shot: Shot;
     modalAddShot: NgbModalRef;
+    isCollapsed = new Array() as Array<boolean>;
 
     constructor(private principal: Principal,
                 private alertService: JhiAlertService,
@@ -42,7 +43,7 @@ export class HomeComponent implements OnInit {
 
     loadAll() {
         const self = this;
-        this.principal.identity().then(function(res) {
+        this.principal.identity().then(function (res) {
             self.playerId = res.playerId;
             self.forceDisponible = [{id: '0.25', label: '25%'},
                 {id: '0.50', label: '50%'},
@@ -52,6 +53,14 @@ export class HomeComponent implements OnInit {
             self.playerClubService.queryForPlayer(self.playerId).subscribe(
                 (resPC: ResponseWrapper) => {
                     self.playerClubs = resPC.json;
+                    self.playerClubs.forEach((club, index) => {
+                        if (index === 0) {
+                            self.isCollapsed.push(false)
+                        }
+                        else {
+                            self.isCollapsed.push(true);
+                        }
+                    })
                 },
                 (_res: ResponseWrapper) => self.onError(_res.json)
             );

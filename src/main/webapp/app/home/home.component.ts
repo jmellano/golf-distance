@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
 
     loadAll() {
         const self = this;
-        this.principal.identity().then(function (res) {
+        this.principal.identity().then(function(res) {
             self.playerId = res.playerId;
             self.forceDisponible = [{id: '0.25', label: '25%'},
                 {id: '0.50', label: '50%'},
@@ -56,8 +56,7 @@ export class HomeComponent implements OnInit {
                     self.playerClubs.forEach((club, index) => {
                         if (index === 0) {
                             self.isCollapsed.push(false)
-                        }
-                        else {
+                        } else {
                             self.isCollapsed.push(true);
                         }
                     })

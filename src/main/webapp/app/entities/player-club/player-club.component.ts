@@ -25,7 +25,7 @@ export class PlayerClubComponent implements OnInit, OnDestroy {
 
     loadAll() {
         const self = this;
-        this.principal.identity().then(function (res) {
+        this.principal.identity().then(function(res) {
             self.playerClubService.queryForPlayer(res.playerId).subscribe(
                 (resPC: ResponseWrapper) => {
                     self.playerClubs = resPC.json;

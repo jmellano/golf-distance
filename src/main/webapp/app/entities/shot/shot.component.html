@@ -19,6 +19,8 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="golfDistanceApp.shot.force">Force</span></th>
             <th><span jhiTranslate="golfDistanceApp.shot.distance">Distance</span></th>
+            <th><span jhiTranslate="golfDistanceApp.shot.temperature">Temperature</span></th>
+            <th><span jhiTranslate="golfDistanceApp.shot.vent">Vent</span></th>
             <th><span jhiTranslate="golfDistanceApp.shot.playerClub">Player Club</span></th>
             <th></th>
             </tr>
@@ -28,6 +30,8 @@
                 <td><a [routerLink]="['../shot', shot.id ]">{{shot.id}}</a></td>
                 <td>{{shot.force}}</td>
                 <td>{{shot.distance}}</td>
+                <td>{{shot.temperature}}</td>
+                <td>{{shot.vent}}</td>
                 <td>
                     <div *ngIf="shot.playerClub">
                         <a [routerLink]="['../player-club', shot.playerClub?.id ]" >{{shot.playerClub?.id}}</a>

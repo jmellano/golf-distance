@@ -22,20 +22,31 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="jhi_force" type="decimal(10,2)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
 
             <column name="distance" type="decimal(10,2)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
 
             <column name="player_club_id" type="bigint">
-                <constraints nullable="true" />
+                <constraints nullable="true"/>
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+    <changeSet id="20171004092517-manuel" author="jmellano">
+        <addColumn schemaName="public"
+                   tableName="shot">
+            <column name="vent" type="decimal(10,2)"/>
+        </addColumn>
+        <addColumn schemaName="public"
+                   tableName="shot">
+            <column name="temperature" type="decimal(10,2)"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

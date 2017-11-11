@@ -42,6 +42,29 @@
                 </small>
             </div>
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="golfDistanceApp.shot.temperature" for="field_temperature">Temperature</label>
+            <input type="number" class="form-control" name="temperature" id="field_temperature"
+                [(ngModel)]="shot.temperature" />
+            <div [hidden]="!(editForm.controls.temperature?.dirty && editForm.controls.temperature?.invalid)">
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.temperature?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="golfDistanceApp.shot.vent" for="field_vent">Vent</label>
+            <input type="number" class="form-control" name="vent" id="field_vent"
+                [(ngModel)]="shot.vent" />
+            <div [hidden]="!(editForm.controls.distance?.dirty && editForm.controls.distance?.invalid)">
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.vent?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="golfDistanceApp.shot.playerClub" for="field_playerClub">Player Club</label>

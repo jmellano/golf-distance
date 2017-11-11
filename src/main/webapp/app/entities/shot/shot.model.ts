@@ -5,6 +5,8 @@ export class Shot implements BaseEntity {
         public id?: number,
         public force?: number,
         public distance?: number,
+        public vent?: number,
+        public temperature?: number,
         public playerClub?: BaseEntity,
     ) {
     }

@@ -17,6 +17,8 @@
             },
             "force": "Force",
             "distance": "Distance",
+            "temperature": "Temperature",
+            "vent": "Wind",
             "playerClub": "Player Club"
         }
     }

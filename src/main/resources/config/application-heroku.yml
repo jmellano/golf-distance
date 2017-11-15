@@ -12,7 +12,7 @@
 
 eureka:
     instance:
-        hostname: golf-distance.herokuapp.com
+        hostname: golf-distance-staging.herokuapp.com
         non-secure-port: 80
         prefer-ip-address: false
     client:

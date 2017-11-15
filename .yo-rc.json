@@ -43,6 +43,6 @@
       "fr",
       "en"
     ],
-    "herokuAppName": "golf-distance"
+    "herokuAppName": "golf-distance-staging"
   }
 }

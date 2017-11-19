@@ -112,7 +112,7 @@ public class Calibration implements Serializable {
 
 
     public String getStandardDeviationResult() {
-        if (average != null && (average.compareTo(BigDecimal.ZERO) != 0)) {
+        if (average != null && (average.compareTo(BigDecimal.ZERO) != 0) && standardDeviation != null) {
             BigDecimal CENT = new BigDecimal(100);
             BigDecimal rapportPourcentage = standardDeviation.divide(average,MathContext.DECIMAL64).multiply(CENT);
             if (rapportPourcentage.compareTo(BigDecimal.ONE) < 0) {

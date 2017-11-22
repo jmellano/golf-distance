@@ -39,11 +39,6 @@
     <div class="modal-body">
         <form name="addShot" role="form" novalidate (ngSubmit)="addShot()" #addShotForm="ngForm">
             <jhi-alert-error></jhi-alert-error>
-            <div class="form-group" [hidden]="!playerId">
-                <label for="id" jhiTranslate="global.field.id">ID</label>
-                <input type="text" class="form-control" id="id" name="id"
-                       [(ngModel)]="playerId" readonly/>
-            </div>
             <div class="form-group">
                 <label class="form-control-label" for="temperature"><span>Température : </span></label>
                 <input [(ngModel)]="shot.temperature" name="temperature"

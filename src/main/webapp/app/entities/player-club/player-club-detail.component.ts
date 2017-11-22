@@ -33,6 +33,7 @@ export class PlayerClubDetailComponent implements OnInit, OnDestroy {
     load(id) {
         this.playerClubService.find(id).subscribe((playerClub) => {
             this.playerClub = playerClub;
+            this.playerClub.player = playerClub.player;
         });
     }
     previousState() {

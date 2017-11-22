@@ -16,23 +16,23 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <!--<th><span jhiTranslate="global.field.id">ID</span></th>-->
             <th><span jhiTranslate="golfDistanceApp.playerClub.type">Type</span></th>
             <th><span jhiTranslate="golfDistanceApp.playerClub.label">Label</span></th>
-            <th><span jhiTranslate="golfDistanceApp.playerClub.player">Player</span></th>
+            <!--<th><span jhiTranslate="golfDistanceApp.playerClub.player">Player</span></th>-->
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let playerClub of playerClubs ;trackBy: trackId">
-                <td><a [routerLink]="['../player-club', playerClub.id ]">{{playerClub.id}}</a></td>
+                <!--<td><a [routerLink]="['../player-club', playerClub.id ]">{{playerClub.id}}</a></td>-->
                 <td>{{playerClub.type}}</td>
                 <td>{{playerClub.label}}</td>
-                <td>
-                    <div *ngIf="playerClub.player">
-                        <a [routerLink]="['../player', playerClub.player?.id ]" >{{playerClub.player?.id}}</a>
-                    </div>
-                </td>
+                <!--<td>-->
+                    <!--<div *ngIf="playerClub.player">-->
+                        <!--<a [routerLink]="['../player', playerClub.player?.id ]" >{{playerClub.player?.id}}</a>-->
+                    <!--</div>-->
+                <!--</td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -117,6 +117,7 @@ export class HomeComponent implements OnInit {
     private onSaveSuccess(result: Shot) {
         this.eventManager.broadcast({name: 'shotListModification', content: 'OK'});
         this.isSaving = false;
+        this.shot.distance = 0;
         this.modalAddShot.close();
     }
 

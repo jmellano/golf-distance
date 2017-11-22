@@ -48,5 +48,15 @@
             <column name="temperature" type="decimal(10,2)"/>
         </addColumn>
     </changeSet>
+    <changeSet id="20171119232517-manuel" author="jmellano">
+        <addColumn schemaName="public"
+                   tableName="shot">
+            <column name="humidite" type="decimal(10,2)"/>
+        </addColumn>
+        <addColumn schemaName="public"
+                   tableName="shot">
+            <column name="pressionair" type="decimal(10,2)"/>
+        </addColumn>
+    </changeSet>
 
 </databaseChangeLog>

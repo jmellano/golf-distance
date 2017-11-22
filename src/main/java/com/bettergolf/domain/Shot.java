@@ -35,6 +35,12 @@ public class Shot implements Serializable {
     @Column(name = "temperature", precision=10, scale=2, nullable = false)
     private BigDecimal temperature;
 
+    @Column(name = "humidite", precision=10, scale=2, nullable = false)
+    private BigDecimal humidite;
+
+    @Column(name = "pressionair", precision=10, scale=2, nullable = false)
+    private BigDecimal pressionair;
+
     @ManyToOne
     private PlayerClub playerClub;
 
@@ -87,6 +93,22 @@ public class Shot implements Serializable {
 
     public void setTemperature(BigDecimal temperature) {
         this.temperature = temperature;
+    }
+
+    public BigDecimal getHumidite() {
+        return humidite;
+    }
+
+    public void setHumidite(BigDecimal humidite) {
+        this.humidite = humidite;
+    }
+
+    public BigDecimal getPressionair() {
+        return pressionair;
+    }
+
+    public void setPressionair(BigDecimal pressionair) {
+        this.pressionair = pressionair;
     }
 
     public PlayerClub getPlayerClub() {

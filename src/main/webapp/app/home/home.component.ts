@@ -11,6 +11,8 @@ import {Account, LoginModalService, Principal, ResponseWrapper} from '../shared'
 import {Shot} from '../entities/shot/shot.model';
 import {Observable} from 'rxjs/Observable';
 
+const DarkSkyApi = require('dark-sky-api');
+
 @Component({
     selector: 'jhi-home',
     templateUrl: './home.component.html',
@@ -29,8 +31,10 @@ export class HomeComponent implements OnInit {
 
     isSaving: boolean;
     shot: Shot;
+    location: any;
     modalAddShot: NgbModalRef;
     isCollapsed = new Array() as Array<boolean>;
+    weatherIcon: string;
 
     constructor(private principal: Principal,
                 private alertService: JhiAlertService,
@@ -43,7 +47,30 @@ export class HomeComponent implements OnInit {
 
     loadAll() {
         const self = this;
-        this.principal.identity().then(function(res) {
+        DarkSkyApi.apiKey = '21de450fc07aea999406249dac64e8ee';
+        DarkSkyApi.units = 'si'; // default 'us'
+        DarkSkyApi.language = 'fr'; // default 'en'
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                self.location = position.coords;
+                const positionDarkSky = {
+                    latitude: self.location.latitude,
+                    longitude: self.location.longitude
+                };
+                DarkSkyApi.loadCurrent(positionDarkSky)
+                    .then(
+                        result => {
+                            console.log(result);
+                            self.shot.temperature = result.temperature;
+                            self.shot.humidite = result.humidity;
+                            self.shot.pressionair = result.pressure;
+                            self.weatherIcon = result.icon;
+
+                        });                // Retrieve weather information from coordinates (Sydney, Australia)
+            });
+        }
+        this.principal.identity().then(function (res) {
             self.playerId = res.playerId;
             self.forceDisponible = [{id: '0.25', label: '25%'},
                 {id: '0.50', label: '50%'},

@@ -68,6 +68,9 @@ export class HomeComponent implements OnInit {
                             self.weatherIcon = result.icon;
 
                         });                // Retrieve weather information from coordinates (Sydney, Australia)
+            }, function (err) {
+                alert('Impossible de récupérer votre position. Si vous n\'avez pas accepter l\'application perd grandement de son intérêt.' + err.message);
+                console.log(err);
             });
         }
         this.principal.identity().then(function (res) {

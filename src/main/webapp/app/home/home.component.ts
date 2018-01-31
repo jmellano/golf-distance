@@ -142,6 +142,7 @@ export class HomeComponent implements OnInit {
         this.loadAll();
         this.shot = new Shot();
         this.shot.playerClub = new PlayerClub();
+        this.shot.force = 1;
 
         this.principal.identity().then((account) => {
             this.account = account;

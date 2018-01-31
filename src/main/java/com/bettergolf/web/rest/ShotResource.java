@@ -55,16 +55,18 @@ public class ShotResource {
         }
         Shot result = shotRepository.save(shot);
 
-        Calibration calibration = calibrationRepository.getOneByPlayerClubIdAndForce(shot.getPlayerClub().getId(), shot.getForce());
-        List<Shot> shots = shotRepository.findAllByPlayerClubIdAndForce(shot.getPlayerClub().getId(), shot.getForce());
+        if(shot.getPlayerClub() != null) {
+            Calibration calibration = calibrationRepository.getOneByPlayerClubIdAndForce(shot.getPlayerClub().getId(), shot.getForce());
+            List<Shot> shots = shotRepository.findAllByPlayerClubIdAndForce(shot.getPlayerClub().getId(), shot.getForce());
 
-        if(calibration == null){
-            calibration = new Calibration();
-            calibration.setForce(shot.getForce());
-            calibration.setPlayerClub(shot.getPlayerClub());
+            if(calibration == null){
+                calibration = new Calibration();
+                calibration.setForce(shot.getForce());
+                calibration.setPlayerClub(shot.getPlayerClub());
+            }
+            calibration.updateCalibrationPlayerClub(shots);
+            calibrationRepository.save(calibration);
         }
-        calibration.updateCalibrationPlayerClub(shots);
-        calibrationRepository.save(calibration);
 
         return ResponseEntity.created(new URI("/api/shots/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

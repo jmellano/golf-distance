@@ -72,7 +72,7 @@ server:
     port: 8080
     ssl:
         key-store: keystore.p12
-        key-store-password: acd13i
+        key-store-password: golfDistance123
         keyStoreType: PKCS12
         keyAlias: tomcat
 
